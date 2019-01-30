@@ -16,8 +16,8 @@ class DepartmentController extends Controller
     public function index()
     {
         //
-        $dept = Departments::all();
-        return view('departments.index', compact('dept'));
+        
+        return Departments::all();
     }
 
     /**
@@ -79,7 +79,7 @@ class DepartmentController extends Controller
         $year = Years::findorfail($id);
         $year->name = $request->get('name');
         $year->save();
-        return redirect()->route('departments.index')->response('Timetable saved successfull', 200);
+        return response()->json("Updated successfully", 200);
     }
 
     /**

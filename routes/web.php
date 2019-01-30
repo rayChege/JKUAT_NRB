@@ -48,3 +48,16 @@ Route::delete('events/{event}', [
 'uses' => 'EventController@destroy']);
 
 Route::resource('departments', 'DepartmentController');
+
+Route::get('timetables/index', [
+'as' => 'timetables.index',
+'uses' => 'TimetableController@webindex']);
+
+Route::get('timetables/create', [
+'as' => 'timetables.create',
+'uses' => 'TimetableController@create']);
+
+Route::post('timetables/store', [
+'as' => 'timetables.store',
+'uses' => 'TimetableController@store'
+]);

@@ -31,15 +31,23 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('events', 'EventController@store');
     Route::put('events/{event}', 'EventController@update');
     Route::delete('events/{event}', 'EventController@destroy');
-    Route::resource('departments', 'DepartmentController');
-    Route::resource('timetables', 'TimetableController');
+   // Route::resource('departments', 'DepartmentController');
+    //Route::resource('timetables', 'TimetableController');
     //Route::resource('years', 'YearController');
     Route::post('years/{id}', 'YearController@update');
     Route::get('years',[
         'as' => 'years.index',
-        'uses' => 'YearController@index'
-    ] );
+        'uses' => 'YearController@index'] );
     Route::delete('years/{id}', 'YearController@destroy');
+
+    Route::post('departments/{id}', 'DepartmentController@update');
+    Route::get('departments', 'DepartmentController@index');
+    Route::delete('departments/{id}', 'DepartmentController@destroy');
+
+    Route::post('timetables/{id}', 'TimetableController@update');
+    Route::get('timetables', 'TimetableController@index');
+    Route::delete('timetables/{id}', 'TimetableController@destroy');
+
 
 });
 

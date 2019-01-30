@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Timetable;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Departments;
+use App\Years;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class TimetableController extends Controller
@@ -35,6 +38,9 @@ class TimetableController extends Controller
     public function create()
     {
         //
+        $year = Years::all();
+        $ray = Departments::all();
+        return view('timetable.timetable', compact('year', 'ray'));
     }
 
     /**
@@ -50,7 +56,9 @@ class TimetableController extends Controller
         $timetable = new Timetable();
         $timetable->department_id = $request->get('department_id');
         $timetable->year_id = $request->get('year_id');
-        $filetype = $request->document_name->getClientOriginalExtension();
+        $timetable->document_name = $request->get('document_name');
+        return $timetable;
+        exit();
         $filename = Carbon::now(). '-'.$request->get('document_name')->getClientOriginalExtension();
 
         $destinationPath = public_path('/upload/timetable');
