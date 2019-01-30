@@ -7,6 +7,11 @@ use App\Years;
 
 class YearController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,11 +43,9 @@ class YearController extends Controller
     public function store(Request $request)
     {
         //
-        $years = new Years();
-        $years->name = $request->get('name');
-        $years->save();
+        $year = years::create($request->all());
 
-        return response('Success', 200);
+        return response()->json($year, 201);
     }
 
     /**
@@ -74,12 +77,14 @@ class YearController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
-        $year = Years::findorfail($id);
+        $year = Years::findOrfail($id);
         $year->name = $request->get('name');
         $year->save();
-        return redirect()->route('years.index')->response('Timetable saved successfull', 200);
+
+        return response()->json("Updated successfully", 200);
     }
 
     /**
