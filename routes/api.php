@@ -28,7 +28,7 @@ Route::group(['prefix' => 'user-management', 'middleware' => ['auth', 'permissio
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('events', 'EventController@index');
     Route::get('events/{event}', 'EventController@show');
-    Route::post('events', 'EventController@store');
+    Route::post('events', 'Api/EventController@store');
     Route::put('events/{event}', 'EventController@update');
     Route::delete('events/{event}', 'EventController@destroy');
    // Route::resource('departments', 'DepartmentController');
